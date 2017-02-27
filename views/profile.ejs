@@ -1,0 +1,128 @@
+</html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <style media="screen">
+        * {
+            font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-weight: bolder;
+        }
+
+        .row {
+            margin: 0;
+        }
+
+        .navbar-default {
+            height: 100px;
+            padding-top: 23px;
+            padding-left: 70px;
+            border: 0;
+            border-radius: 0 !important;
+            background: #1d80af;
+        }
+
+        .navbar-default .navbar-brand {
+            text-transform: uppercase;
+            font-size: 2em;
+            text-decoration: none;
+            color: white;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .navbar-default .navbar-brand:hover {
+            color: #1d80af;
+            transition: color 0.3s ease;
+        }
+
+        .card {
+            padding: 10px;
+            padding-top: 20px;
+            background: #18bc9c;
+            border: 1px #c8c3ff solid;
+            border-radius: 5px;
+            text-align: center;
+            margin: 10px 3% 1% 3%;
+            height: 190px;
+            width: calc(80% * (1/3));
+        }
+
+        .card .card-title {
+            color: #02695e;
+            font-size: 2em;
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+
+        .card .card-link {
+            margin-top: 40px;
+            font-size: 1.1em;
+            font-weight: bold;
+            width: 90%;
+            border: 2px solid white;
+            color: white;
+            background: transparent;
+            transition: background-color 0.5s ease;
+        }
+
+        .card .card-link:hover {
+            color: #18bc9c;
+            background: white;
+            transition: background-color 0.5s ease;
+        }
+
+        .form-container {
+            height: 400px;
+            padding-left: 30px;
+        }
+
+        .form-control {
+            width: 90%;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">PORTFOLIO SYSTEM</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="row">
+        <div class="col-xs-12 col-md-8">
+          <h1>Welcome <%= User %>.. </h1>
+
+          <% for(var i=0; i<projects.length; i++){%>
+                    <div class="card col-xs-4">
+                        <h4 class="card-title"> <%= projects[i].title %></h4>
+                        <a href="<%= projects[i].URL %>" class="btn btn-primary card-link">Visit Website</a>
+                    </div>
+                <% } %>
+
+        </div>
+        <div class="col-xs-12 col-md-4">
+            <div class="form-container">
+                <div class="row">
+                  <% if(i==0){ %>
+                  <h3> You don't have a portfolio yet :( </h3>
+                    <h3 style="margin-bottom:40px;">Add work to create your portfolio..</h3>
+                    <button name="createprofile" class="btn btn-default" onclick="window.location='/add/<%=i%>';">Create portfolio </button>
+                <%  }else{ %>
+                    <h3> Here is your portfolio :) </h3>
+                    <button name="addwork" class="btn btn-default" onclick="window.location='/';">Add work :D </button>
+                    <%}%>
+
+              </div>
+                </div>
+        </div>
+    </div>
+
+</html>
