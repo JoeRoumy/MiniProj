@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Portfolio</title>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="jquery.min.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="bootstrap.min.js"></script>
     <style media="screen">
         * {
             font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -48,7 +48,7 @@
             border-radius: 5px;
             text-align: center;
             margin: 10px 3% 1% 3%;
-            height: 190px;
+            height: 250px;
             width: calc(80% * (1/3));
         }
 
@@ -97,29 +97,38 @@
     </nav>
 
     <div class="row">
-        <div class="col-xs-12 col-md-8">
-          <h1>Welcome <%= User %>.. </h1>
-
-          <% for(var i=0; i<projects.length; i++){%>
+        <div >
+          <h1 style="text-indent: 1%" >Welcome <%= session.username %>.. </h1>
+          <%var i=0;%>
+          <% for(i=0; i<session.works.length; i++){%>
                     <div class="card col-xs-4">
-                        <h4 class="card-title"> <%= projects[i].title %></h4>
-                        <a href="<%= projects[i].URL %>" class="btn btn-primary card-link">Visit Website</a>
+                        <h4 class="card-title"> <%= session.works[i].workname %></h4>
+                        <%if(session.works[i].ispic==0){%>
+                        <a href="<%= session.works[i].resource %>" class="btn btn-primary card-link">Go to Link/Repo</a>
+                        <%}else{%>
+                          <a href="<%= session.works[i].resource %>" style="width:90%;">
+                          <img src="<%= session.works[i].resource %>" alt="" style="height:150px;">
+                        </a>
+                        <%}%>
                     </div>
                 <% } %>
 
         </div>
-        <div class="col-xs-12 col-md-4">
+        <br><br>
+        <div>
             <div class="form-container">
                 <div class="row">
                   <% if(i==0){ %>
                   <h3> You don't have a portfolio yet :( </h3>
                     <h3 style="margin-bottom:40px;">Add work to create your portfolio..</h3>
-                    <button name="createprofile" class="btn btn-default" onclick="window.location='/add/<%=i%>';">Create portfolio </button>
+                    <button name="createprofile" class="btn btn-default" onclick="window.location='/add'">Create portfolio </button>
                 <%  }else{ %>
-                    <h3> Here is your portfolio :) </h3>
-                    <button name="addwork" class="btn btn-default" onclick="window.location='/';">Add work :D </button>
-                    <%}%>
 
+                    <h3> Here is your portfolio :) </h3>
+                    <button name="addwork" class="btn btn-default" onclick="window.location='/add'">Add work :D </button>
+
+                    <%}%>
+                    <br><br><br><br>
               </div>
                 </div>
         </div>

@@ -4,9 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Portfolio</title>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="jquery.min.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="bootstrap.min.js"></script>
+    <script type="text/javascript">
+
+      function radioselect(val){
+        if(val==0){
+        document.getElementById("pic").hidden="";
+        document.getElementById("link").hidden="true";
+
+      }else{
+        document.getElementById("pic").hidden="true";
+        document.getElementById("link").hidden="";
+
+      }}
+    </script>
     <style media="screen">
         * {
             font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -96,31 +109,59 @@
         </div>
     </nav>
     <div class="row">
-        <div class="col-xs-12 col-md-8">
-            <div class="row">
 
-
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-4">
+        <div >
             <div class="form-container">
-              <%  if(oldprofile!=0) {    %>
-                <h3 style="margin-bottom:40px;">Login</h3>
-                  <h3 style="margin-bottom:20px; color:red">oldprofile !!</h3>
-                <% } %>
-                <form class="form" method="POST" action="/">
+              <%  if(session.works.length!=0) {    %>
+                <form class="form" method="POST" action="/add" enctype=multipart/form-data>
                     <div class="form-group">
-                        <label for="InputTitle">Username</label>
-                        <input name = "Username" type="text" class="form-control" id="InputTitle" placeholder="Username">
-                    </div>
-                    <div class="form-group">
-                        <label for="InputLink">Password</label>
-                        <input name = "Pass" type="password" class="form-control" id="InputLink" placeholder="Password">
-                    </div>
-                    <button type="submit" class="btn btn-default">Login</button>
+                      <h2>You currently have <%=session.works.length%> works..</h2><br><br>
+                    <label>Enter a work name</label>
+                    <input type="text" name="workname" class="form-control" placeholder="Workname..(Mandatory)"> <br>
+                    <input type="radio" name="picORlink" value="link" onclick="radioselect(1)" checked="true"> Add a link or repo <br>
+                    <input type="radio" name="picORlink" value="pic" onclick="radioselect(0)"> Upload a screenshot <br><br>
+                  <div id="link" >
+                     <input hidden="true" type="text" name="Link" class="form-control" placeholder="Work/Repo URL.."> <br>
+                  </div>
+                  <div hidden="true" id="pic">
+                    <input  type="file" name="workpic"  class="form-control"> <br>
+                  </div>
+
+                    <br><br>
+
+                    <button type="submit" class="btn btn-default">Add work !</button>
                 </form>
+                <% } else{ %>
+                <form class="form" method="POST" action="/add" enctype=multipart/form-data>
+                    <div class="form-group">
+                        <label for="InputTitle">Enter your name</label>
+                        <input name = "Name" type="text" class="form-control" id="InputTitle" placeholder="Name..(Mandatory)">
+                    </div>
+                    <br>
+                    <label>Upload profile picture..(optional)</label>
+                    <br>
+                    <input type="file" name="profilepic" class="form-control">
+                    <br><br>
+                    <label>To create a profile succesfully you need to add your at least one work :D</label>
+                    <br><br>
+
+                    <label>Enter a work name</label>
+                    <input type="text" name="workname" class="form-control" placeholder="Workname..(Mandatory)"> <br>
+                    <input type="radio" name="picORlink" value="link" onclick="radioselect(1)" checked="true"> Add a link or repo <br>
+                    <input type="radio" name="picORlink" value="pic" onclick="radioselect(0)"> Upload a screenshot <br><br>
+                  <div id="link" >
+                     <input hidden="true" type="text" name="Link" class="form-control" placeholder="Work/Repo URL.."> <br>
+                  </div>
+                  <div hidden="true" id="pic">
+                    <input  type="file" name="workpic"  class="form-control"> <br>
+                  </div>
+
+                    <br><br>
+
+                    <button type="submit" class="btn btn-default">Create profile!!</button>
+                </form>
+                <%}%>
                 <div style="margin-top:40px;">
-                  <a class="row" href="/signup"> New User? Sign up here..</a></div>
             </div>
         </div>
     </div>
