@@ -46,38 +46,42 @@ if(err){
 
 }else{
   if(req.session.works.length==0){
-  vals[0].name=req.body.Name;
-  if(req.files.length>0)vals[0].profilepic=req.files[0].path;
-  if(req.files.length>1){
-  vals[0].works.push({
-    "workname": req.body.workname,
-    "resource": req.files[1].path,
-    "ispic":"1"
-  });}
-  else{
-    vals[0].works.push({
-      "workname": req.body.workname,
-      "resource": req.body.Link,
-      "ispic":"0"
-    });
-  }
+    if(req.body.Name&&req.body.workname){
+      vals[0].name=req.body.Name;
+      if(req.files.length>0)vals[0].profilepic=req.files[0].path;
+      if(req.files.length>1){
+      vals[0].works.push({
+        "workname": req.body.workname,
+        "resource": req.files[1].path,
+        "ispic":"1"
+      });}
+      else{
+        vals[0].works.push({
+          "workname": req.body.workname,
+          "resource": "http://"+req.body.Link,
+          "ispic":"0"
+        });
+      }
+    }else { res.render('add',{session:req.session,wrongcredentials:((req.body.Name)? 1:2)});    }
 }else {
-  if(req.files.length>0){
-  vals[0].works.push({
-    "workname": req.body.workname,
-    "resource": req.files[0].path,
-    "ispic":"1"
-  });}
-  else{
-    vals[0].works.push({
-      "workname": req.body.workname,
-      "resource": req.body.Link,
-      "ispic":"0"
-    });
-  }
-}
+      if(req.body.workname){
+        if(req.files.length>0){
+        vals[0].works.push({
+          "workname": req.body.workname,
+          "resource": req.files[0].path,
+          "ispic":"1"
+        });}
+        else{
+          vals[0].works.push({
+            "workname": req.body.workname,
+            "resource": "http://"+req.body.Link,
+            "ispic":"0"
+          });
+        }
+} else{res.render('add',{session:req.session,wrongcredentials:1});}}
 vals[0].save(function(err){
-  if(err)console.log(err);
+  if(err){console.log(err);
+  }
   else {
     req.session.works=vals[0].works;
     res.render('profile',{"session":req.session});
@@ -89,7 +93,7 @@ vals[0].save(function(err){
 }
 ,
 viewsummary:function(req,res){
-profilecollection.paginate({},{page:req.session.thispage, limit:10},function(err,result){
+profilecollection.paginate({"name":/.*/},{page:req.session.thispage, limit:10},function(err,result){
   if(err){
     res.send(err);
     }

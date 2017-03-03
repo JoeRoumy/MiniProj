@@ -8,10 +8,10 @@ var upload = multer({dest: 'public/uploads'});
 
 router.get('/add',function(req,res) {
   if(req.session.works){
-    res.render('add',{session:req.session});
+    res.render('add',{session:req.session,wrongcredentials:0});
   }
   else{
-    res.send(400);
+    res.sendStatus(400);
   }
 });
 router.post('/add',upload.any(),controller.createprofile);//input type file//enctype=multipatr/form-data

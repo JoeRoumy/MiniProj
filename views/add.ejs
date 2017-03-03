@@ -111,6 +111,12 @@
     <div class="row">
 
         <div >
+
+          <%  if(wrongcredentials==1) {    %>
+            <h3 style="margin-bottom:20px; color:red;   padding-left: 30px;">Failed !! Wornkname cannot be empty..</h3>
+          <% } else if(wrongcredentials==2){ %>
+            <h3 style="margin-bottom:20px; color:red;  padding-left: 30px;">Failed !! Name cannot be empty..</h3>
+              <%}%>
             <div class="form-container">
               <%  if(session.works.length!=0) {    %>
                 <form class="form" method="POST" action="/add" enctype=multipart/form-data>
