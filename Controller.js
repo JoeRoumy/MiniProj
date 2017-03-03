@@ -94,7 +94,7 @@ profilecollection.paginate({},{page:req.session.thispage, limit:10},function(err
     res.send(err);
     }
     else{
-      res.render('summary',{profiles:result,endofresults:(10*req.session.thispage>=result.total)});
+      res.render('summary',{profiles:result.docs,pages:result.pages});
     }
 });
 

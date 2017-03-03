@@ -24,7 +24,8 @@ router.post('/',controller.login);
 router.get('/signup',function(req,res){res.render('signup',{"wrongcredentials":0});});
 router.post('/signup',controller.signup);
 
-router.get('/summary',function(req,res){req.session.thispage=1; res.render('summary') ;controller.viewsummary;});
+router.get('/summary',function(req,res){req.session.thispage=1; controller.viewsummary(req,res);});
+router.post('/summary',function(req,res){req.session.thispage=req.body.gotopage; controller.viewsummary(req,res);});
 
 
 module.exports = router;

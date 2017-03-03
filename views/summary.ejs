@@ -98,26 +98,20 @@
 
     <div class="row">
         <div >
-          <% for(var i=0; i<0; i++){%>
+          <% for(var i=0; i<profiles.length; i++){%>
                     <div class="card col-xs-4">
-                        <h4 class="card-title"> <%= works[i].title %></h4>
-                        <a href="<%= works[i].URL %>" class="btn btn-primary card-link">Visit Website</a>
+                        <h4 class="card-title"> <%= profiles[i].name%></h4>
+                        <a href="<%= profiles[i].username %>" class="btn btn-primary card-link">Visit Website</a>
                     </div>
                 <% } %>
-
         </div>
         <div>
             <div class="form-container">
                 <div class="row">
-                  <% if(i==0){ %>
-                  <h3> You don't have a portfolio yet :( </h3>
-                    <h3 style="margin-bottom:40px;">Add work to create your portfolio..</h3>
-                    <button name="createprofile" class="btn btn-default" onclick="window.location='/add/<%=i%>';">Create portfolio </button>
-                <%  }else{ %>
-                    <h3> Here is your portfolio :) </h3>
-                    <button name="addwork" class="btn btn-default" onclick="window.location='/';">Add work :D </button>
-                    <%}%>
-
+                  <form class="form-data" action="/summary" method="post">
+                    <input type="number" name="gotopage" value="">
+                    <input type="submit" name="" value="">
+                  </form>
               </div>
                 </div>
         </div>
