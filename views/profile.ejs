@@ -7,6 +7,7 @@
     <script src="jquery.min.js"></script>
     <link rel="stylesheet" href="bootstrap.min.css">
     <script src="bootstrap.min.js"></script>
+
     <style media="screen">
         * {
             font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -92,13 +93,16 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">PORTFOLIO SYSTEM</a>
+                <button name="logout" style="position: fixed; right:50;" class="btn btn-default" onclick="window.location='/logout'">Log out.. </button>
             </div>
         </div>
     </nav>
 
     <div class="row">
-        <div >
-          <h1 style="text-indent: 1%" >Welcome <%= session.username %>.. </h1>
+        <div style="text-indent: 2%">
+          <h1 id="greet" style="text-indent: 2%;display: inline;" >Welcome <%= session.username %>.. </h1> <%if(session.pp){%><img src="<%=session.pp%>" style="height:100px; width:100px; display: inline; border-radius: 50%;">
+          <%}%>
+        </div><div>
           <%var i=0;%>
           <% for(i=0; i<session.works.length; i++){%>
                     <div class="card col-xs-4">

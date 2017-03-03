@@ -14,6 +14,11 @@ router.get('/add',function(req,res) {
     res.sendStatus(400);
   }
 });
+router.get('/logout',function(req,res){
+  req.session.regenerate(function(err){});
+  res.redirect('/');
+});
+
 router.post('/add',upload.any(),controller.createprofile);//input type file//enctype=multipatr/form-data
 
 
@@ -26,6 +31,8 @@ router.post('/signup',controller.signup);
 
 router.get('/summary',function(req,res){req.session.thispage=1; controller.viewsummary(req,res);});
 router.post('/summary',function(req,res){req.session.thispage=req.body.gotopage; controller.viewsummary(req,res);});
+
+router.get('/summary/:username',controller.viewauser);
 
 
 module.exports = router;

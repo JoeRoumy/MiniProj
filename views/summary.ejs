@@ -58,6 +58,11 @@
             text-transform: capitalize;
         }
 
+        .card .card-tit {
+            font-size: 2.3em;
+            font-weight: bold;
+            text-transform: capitalize;
+        }
         .card .card-link {
             margin-top: 40px;
             font-size: 1.1em;
@@ -108,9 +113,9 @@
     <div class="row">
           <% for(var i=0; i<profiles.length; i++){%>
                     <div class="card col-xs-4">
-                        <h4 class="card-title"> <%= profiles[i].name%></h4>
+                        <a href="/summary/<%=profiles[i].username%>" class="card-tit"> <%= profiles[i].name%></a><br>
                       <%if(profiles[i].profilepic){%>
-                       <img src="<%= profiles[i].profilepic %>" alt="" style="height:150px;"><br><br>
+                       <img src="<%= profiles[i].profilepic %>" alt="" style="height:150px;  border-radius: 50%;"><br><br>
                          <% }if(profiles[i].works.length>=2){%>
                            <label style="color: #02695e;
                            font-size: 1.5em;"><%= profiles[i].works[0].workname %>:</label>

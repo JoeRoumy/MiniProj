@@ -4,27 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Portfolio</title>
-    <script src="jquery.min.js"></script>
-    <link rel="stylesheet" href="bootstrap.min.css">
-    <script src="bootstrap.min.js"></script>
-    <script type="text/javascript">
+    <script src="/jquery.min.js"></script>
+    <link rel="stylesheet" href="/bootstrap.min.css">
+    <script src="/bootstrap.min.js"></script>
 
-  function checkForm(form)
-  {
-      if(form.Pass.value.length ==0) {
-        alert("Error: Password cannot be empty!");
-        form.Pass.focus();
-        return false;
-      }
-      if(form.Username.value.length ==0) {
-        alert("Error: Username cannot be empty!");
-        form.Username.focus();
-        return false;
-      }
-    return true;
-  }
-
-</script>
     <style media="screen">
         * {
             font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -66,7 +49,7 @@
             border-radius: 5px;
             text-align: center;
             margin: 10px 3% 1% 3%;
-            height: 190px;
+            height: 250px;
             width: calc(80% * (1/3));
         }
 
@@ -113,33 +96,34 @@
             </div>
         </div>
     </nav>
+
     <div class="row">
-
-        <div >
-            <div class="form-container">
-                <h3 style="margin-bottom:40px;">Login</h3>
-                <%  if(wrongcredentials) {    %>
-                  <h3 style="margin-bottom:20px; color:red">Wrong username or password !!</h3>
+        <div style="text-indent: 2%">
+          <h1 style="text-indent: 2%;display: inline;"  >This is <%=session.username %>'s profile.. </h1> <%if(session.profilepic){%><img src="/<%=session.profilepic%>" style="height:100px; width:100px; display:inline; border-radius: 50%;">
+          <%}%>
+        </div><div>
+          <%var i=0;%>
+          <% for(i=0; i<session.works.length; i++){%>
+                    <div class="card col-xs-4">
+                        <h4 class="card-title"> <%= session.works[i].workname %></h4>
+                        <%if(session.works[i].ispic==0){%>
+                        <a href="<%= session.works[i].resource %>" class="btn btn-primary card-link">Go to Link/Repo</a>
+                        <%}else{%>
+                          <a href="/<%= session.works[i].resource %>" style="width:90%;">
+                          <img src="/<%= session.works[i].resource %>" alt="" style="height:150px;" border="0">
+                        </a>
+                        <%}%>
+                    </div>
                 <% } %>
-                <form class="form" method="POST" onsubmit="return checkForm(this);" action="/">
-                    <div class="form-group">
-                        <label for="InputTitle">Username</label>
-                        <input name = "Username" type="text" class="form-control" id="InputTitle" placeholder="Username">
-                    </div>
-                    <div class="form-group">
-                        <label for="InputLink">Password</label>
-                        <input name = "Pass" type="password" class="form-control" id="InputLink" placeholder="Password">
-                    </div>
-                    <button type="submit" class="btn btn-default">Login</button>
 
-                </form>
-                <br>
-                <label> ..Or.. </label><br><br>
-              <div>  <button type="input" class="btn btn-default" onclick="window.location='/summary'">View a summary of portfolios</button> </div>
-                <div style="margin-top:40px;">
-                  <a class="row" href="/signup"> New User? Sign up here..</a></div>
+        </div>
+        <br><br>
+        <div>
+            <div class="form-container">
+                <div class="row">
 
-            </div>
+              </div>
+                </div>
         </div>
     </div>
 

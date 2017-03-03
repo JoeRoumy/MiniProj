@@ -5,6 +5,7 @@ let profilecollection = require('./profilecollection');
 let controller = {
 
 login: function(req,res){
+  req.session.regenerate(function(err){});
   profilecollection.find({"username": req.body.Username, "password": req.body.Pass},function(err,vals){
     if(err)
     res.send(err.message);
@@ -12,6 +13,7 @@ login: function(req,res){
     if(vals.length!=0){
       req.session.username=req.body.Username;
       req.session.works=vals[0].works;
+      if(vals[0].profilepic)req.session.pp=vals[0].profilepic;
       res.render('profile',{session:req.session});//succesful login
     }
     else {
@@ -103,6 +105,11 @@ profilecollection.paginate({"name":/.*/},{page:req.session.thispage, limit:10},f
 });
 
 
+},
+viewauser:function(req,res){
+  profilecollection.find({"username":req.params.username},function(err,val){
+    res.render('viewuser',{session:val[0]});
+  })
 }
 
 
