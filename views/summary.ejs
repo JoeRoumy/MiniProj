@@ -100,6 +100,11 @@
         </div>
     </nav>
     <div style="text-align:center">
+      <form class="form-data" action="/search" method="post">
+        <input type="search" name="search" class="form-control" placeholder="Search all works.." style="display:inline; width:60%;">
+        <input type="submit" name="" value="Search" style="display:inline" class="btn btn-default">
+      </form>
+      <hr>
           <form class="form-data" action="/summary" method="post">
             <input hidden="true" type="number" name="gotopage" value="">
             <h3>Go to page..</h3>

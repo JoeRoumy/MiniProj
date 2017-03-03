@@ -1,0 +1,124 @@
+</html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio</title>
+    <script src="jquery.min.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="bootstrap.min.js"></script>
+    <style media="screen">
+        * {
+            font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-weight: bolder;
+        }
+
+        .row {
+            margin: 0;
+        }
+
+        .navbar-default {
+            height: 100px;
+            padding-top: 23px;
+            padding-left: 70px;
+            border: 0;
+            border-radius: 0 !important;
+            background: #1d80af;
+        }
+
+        .navbar-default .navbar-brand {
+            text-transform: uppercase;
+            font-size: 2em;
+            text-decoration: none;
+            color: white;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .navbar-default .navbar-brand:hover {
+            color: #1d80af;
+            transition: color 0.3s ease;
+        }
+
+        .card {
+            padding: 10px;
+            padding-top: 20px;
+            background: #18bc9c;
+            border: 1px #c8c3ff solid;
+            border-radius: 5px;
+            text-align: center;
+            margin: 10px 3% 1% 3%;
+            width: calc(80% * (1/3));
+        }
+
+        .card .card-title {
+            color: #02695e;
+            font-size: 2em;
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+
+        .card .card-tit {
+            font-size: 2.3em;
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+        .card .card-link {
+            margin-top: 40px;
+            font-size: 1.1em;
+            font-weight: bold;
+            width: 90%;
+            border: 2px solid white;
+            color: white;
+            background: transparent;
+            transition: background-color 0.5s ease;
+        }
+
+        .card .card-link:hover {
+            color: #18bc9c;
+            background: white;
+            transition: background-color 0.5s ease;
+        }
+
+        .form-container {
+            height: 400px;
+            padding-left: 30px;
+        }
+
+        .form-control {
+            width: 90%;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">PORTFOLIO SYSTEM</a>
+            </div>
+        </div>
+    </nav>
+    <div style="text-align:center">
+            <h1 style="text-align:center"> Search results for "<%= keyword%>"</h1>
+            <%if(works.length==0){%>
+              <label>No profiles here yet :(</label>
+            <%}%>
+      </div>
+    <div class="row">
+      <% for(i=0; i<works.length; i++){%>
+                <div class="card col-xs-4">
+                    <h4 class="card-title"> <%=works[i].workname %></h4>
+                    <%if(works[i].ispic==0){%>
+                    <a href="<%= works[i].resource %>" class="btn btn-primary card-link">Go to Link/Repo</a>
+                    <%}else{%>
+                      <a href="<%= works[i].resource %>" style="width:90%;">
+                      <img src="<%= works[i].resource %>" alt="" style="height:150px;" border="0">
+                    </a>
+                    <%}%>
+                </div>
+            <% } %>
+
+    </div>
+
+</html>

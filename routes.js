@@ -34,5 +34,7 @@ router.post('/summary',function(req,res){req.session.thispage=req.body.gotopage;
 
 router.get('/summary/:username',controller.viewauser);
 
+router.post('/search',controller.search);
+
 
 module.exports = router;

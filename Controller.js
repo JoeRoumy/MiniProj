@@ -111,7 +111,26 @@ viewauser:function(req,res){
     res.render('viewuser',{session:val[0]});
   })
 }
+,
+search:function(req,res){
+  var allworks=[];
+  profilecollection.find({"name":/.*/},function(err,result){
+    for (var i = 0; i < result.length; i++) {
+        var temp=[];
+        temp=allworks.concat(result[i].works);
+        allworks=temp;
 
+    }
+    var re=new RegExp(".*"+req.body.search+".*",'i');
+    var resultss=[];
+    for (var i = 0; i < allworks.length; i++) {
+      if(re.test(allworks[i].workname))
+      resultss.push(allworks[i]);
+    }
+    res.render('searchresults',{works:resultss,keyword:req.body.search});
+  })
+
+}
 
 
 
